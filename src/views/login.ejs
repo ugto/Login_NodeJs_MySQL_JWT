@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login NodeJS MySQL</title>
+
+    <!--Bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!--CSS de plantilla-->
+    <link href="css/sign-in.css" rel="stylesheet">
+    <!--Styles personales y locales-->
+    <link  href="css/styles.css" rel="stylesheet">
+</head>
+
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="form-signin w-100 m-auto text-center shadow-lg p-4 bg-white rounded-3">
+      <form action="/login" method="post">
+        <img class="mb-4" src="img/bootstrap-logo.svg" alt="" width="72" height="57"/>
+        <h1 class="h3 mb-3 fw-normal">Login NodeJs</h1>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"/>
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+          <label for="password">clave</label>
+        </div>
+        <div class="d-flex">
+          <button class="btn btn-primary w-100 py-2 mb-3" type="submit">Login</button>
+          <!--<button class="btn btn-register w-100 py-2" href="/register" type="submit">Registro</button>
+          <a href="/register" type="button" class="w-100 btn-lg btn-register">Registro</a>-->
+        </div>
+      </form>
+      <a href="/register" class="btn btn-register w-100 py-2" type="button">Registro</a>
+      
+    </main>
+
+    <!--JS Bootstrap 5.3.3-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!--CDN SweetAlert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <% if(alert) { %>
+      <script>
+        Swal.fire({
+          title: '<%= alertTitle %>',
+          text: '<%= alertMessage %>',
+          icon: '<%= alertIcon %>',
+          showConfirmButton: <%= showConfirmButton %>,
+          timer: <%= timer %>
+        }).then(()=>{
+          window.location = '/<%= ruta %>'
+        })
+      </script>
+    <% } %>
+</body>
+</html>
