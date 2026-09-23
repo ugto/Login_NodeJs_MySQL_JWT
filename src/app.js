@@ -30,6 +30,13 @@ dotenv.config({path:'./src/env/.env'})
 //Rutas
 app.use('/',require('./routes/router'))
 
+//Limpiar cache despues de realizar log-out
+app.use(function(req,res,next){
+    if(!req.user)
+        res.header('Cache-control','private, no-cache, no-store, must-revalidate');
+    next()
+});
+
 //Configurar servidor
 app.listen(3000,()=>{
     console.log('Servidor Activo en puerto', 3000)

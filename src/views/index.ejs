@@ -158,7 +158,11 @@
       
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
+            <% if(email) { %>
+                  <span class="badge bg-info"><%= email.name %></span>
+            <% } %>
             <a href="logout" class="btn btn-danger px-3">Salir</a>
+            
         </div>
       </div>
     </header>
@@ -299,7 +303,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link d-flex align-items-center gap-2" href="#">
+                  <a class="nav-link d-flex align-items-center gap-2" href="logout">
                     <svg class="bi" aria-hidden="true">
                       <use xlink:href="#door-closed"></use>
                     </svg>

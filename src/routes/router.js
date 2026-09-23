@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const conexion = require('../database/db')
+//const conexion = require('../database/db')
 const authController = require('../controllers/authController')
 
 //Rutas para las Vistas 'Views'
-router.get('/',(req,res)=>{
-    res.render('index')
+router.get('/', authController.isauthenticated,(req,res)=>{
+    res.render('index', {email:req.email})
 })
 
 router.get('/login',(req,res)=>{
@@ -22,6 +22,7 @@ router.get('/register2',(req,res)=>{
 //Router para los metodos de controllers s
  router.post('/register', authController.register)
  router.post('/login', authController.login)
+ router.get('/logout',authController.logout)
 
 module.exports= router
 

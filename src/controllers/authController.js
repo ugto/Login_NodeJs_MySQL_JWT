@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 const {promisify} = require ('util')
-const { error } = require('console')
+
 
 //Promesas para Registrar usuario
 
@@ -60,7 +60,7 @@ exports.login = async(req,res)=>{
                     })
                     //Tocken sin fecha de expiracion
                     //const token = jwt.sign({id:id},process.env.JWT_SECRETO)
-                    console.log("TOKEN: " + token + "Para el usuaio: " + email)
+                    //console.log("TOKEN: " + token + "Para el usuaio: " + email)
                     
                     //Cookies
                     const cookiesOptions={
@@ -85,3 +85,27 @@ exports.login = async(req,res)=>{
     }
 }
 
+exports.isauthenticated = async (req,res,next)=>{
+    if(req.cookies.jwt){
+        try {
+            const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+            conexion.query('SELECT * FROM users WHERE id = ?',[decodificada.id],(error,results)=>{
+                if(!results){
+                return next()
+                }
+                req.email = results[0]
+                return next()
+            })
+        } catch (error) {
+            console.log(error)
+            return next()
+        }
+    }else{
+        res.redirect('/login')
+    }
+}
+
+exports.logout = (req, res)=>{
+    res.clearCookie('jwt')
+    return res.redirect('/')
+}
