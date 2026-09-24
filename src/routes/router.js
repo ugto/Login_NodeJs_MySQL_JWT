@@ -15,8 +15,8 @@ router.get('/register',(req,res)=>{
     res.render('register')
 })
 
-router.get('/register2',(req,res)=>{
-    res.render('register2')
+router.get('/register2', authController.isauthenticated,(req,res)=>{
+    res.render('register2,{email:req.email}')
 })
 
 //Router para los metodos de controllers s
